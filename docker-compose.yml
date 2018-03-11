@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./front-end
+    command: npm start
+    ports:
+      - 9000:9000
+    volumes:
+      - ./front-end:/src
+      - frontend-deps:/src/node_modules
+      
+volumes:
+  frontend-deps:
