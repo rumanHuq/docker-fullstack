@@ -1,25 +1,21 @@
 version: '3'
-
 services:
-
-  frontend:
-    build: ./front-end
+frontend:
+    build: front-end
     command: npm start
     ports:
       - 9000:9000
     volumes:
       - ./front-end:/front
       - frontend-deps:/front/node_modules
-
   backend:
-    build: ./back-end
+    build: back-end
     command: npm start
     ports:
       - 3000:3000
     volumes:
       - ./back-end:/back
       - backend-deps:/back/node_modules
-
 
 volumes:
   frontend-deps:
