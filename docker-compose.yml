@@ -1,22 +1,33 @@
-version: '3'
+version: "3"
 services:
   frontend:
-      build: front-end
-      command: npm start
-      ports:
-        - '9000:9000'
-      volumes:
-        - ./front-end:/front
-        - frontend-deps:/front/node_modules
+    build: front-end
+    command: yarn start
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./front-end:/front
+      - frontend-deps:/front/node_modules
   backend:
     build: back-end
-    command: npm start
+    command: yarn start
     ports:
-      - '3000:3000'
+      - "3000:3000"
+    networks:
+      - app
     volumes:
       - ./back-end:/back
       - backend-deps:/back/node_modules
 
+  database:
+    image: mongo
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+
 volumes:
-  frontend-deps:
-  backend-deps:
+  ? frontend-deps
+  ? backend-deps
