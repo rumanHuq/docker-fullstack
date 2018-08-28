@@ -21,6 +21,10 @@ services:
 
   database:
     image: mongo
+    volumes:
+      - ~/data/db:/data/db
+    ports:
+      - "27010:27017"
     networks:
       - app
 
