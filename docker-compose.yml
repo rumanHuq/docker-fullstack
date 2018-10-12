@@ -15,14 +15,24 @@ services:
       - "3000:3000"
     networks:
       - app
+    links:
+      # within backend container, now we can use the namesapce as hostname('database' instead of 'localhost')
+      # e.g. mongoose.connect("mongodb://database:27017/feedbackly")
+      - database
     volumes:
       - ./back-end:/back
       - backend-deps:/back/node_modules
+    depends_on:
+      - "database"
+    command: ["./wait-for-it.sh", "database:27017", "--", "npm", "start"]
+    healthcheck:
+      interval: 5s
+      retries: 100
 
   database:
     image: mongo
     volumes:
-      - ~/data/db:/data/db
+      - ~/data/docker-ts:/data/db
     ports:
       - "27010:27017"
     networks:
