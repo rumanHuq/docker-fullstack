@@ -24,7 +24,28 @@ services:
       - backend-deps:/back/node_modules
     depends_on:
       - "database"
-    command: ["./wait-for-it.sh", "database:27017", "--", "npm", "start"]
+    command: ["./wait-for-it.sh", "database:27017", "--", "yarn", "start"]
+    healthcheck:
+      interval: 5s
+      retries: 100
+  
+  graphql:
+    build: graphql
+    command: yarn start
+    ports:
+      - "1111:1111"
+    networks:
+      - app
+    links:
+      # within backend container, now we can use the namesapce as hostname('database' instead of 'localhost')
+      # e.g. mongoose.connect("mongodb://database:27017/feedbackly")
+      - database
+    volumes:
+      - ./graphql:/graphql
+      - graphql-deps:/graphql/node_modules
+    depends_on:
+      - "database"
+    command: ["./wait-for-it.sh", "database:27017", "--", "yarn", "start"]
     healthcheck:
       interval: 5s
       retries: 100
@@ -45,3 +66,4 @@ networks:
 volumes:
   ? frontend-deps
   ? backend-deps
+  ? graphql-deps

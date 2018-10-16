@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "front-end"
+    },
+    {
+      "path": "back-end"
+    },
+    {
+      "path": "."
+    },
+    {
+      "path": "graphql"
+    }
+  ],
+  "settings": {}
+}
