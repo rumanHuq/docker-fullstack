@@ -4,13 +4,10 @@
       "path": "front-end"
     },
     {
-      "path": "back-end"
-    },
-    {
       "path": "."
     },
     {
-      "path": "graphql"
+      "path": "back-end"
     }
   ],
   "settings": {}
