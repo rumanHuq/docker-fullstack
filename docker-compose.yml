@@ -28,7 +28,7 @@ services:
     healthcheck:
       interval: 5s
       retries: 100
-  
+
   database:
     image: mongo
     volumes:
@@ -43,6 +43,5 @@ networks:
     driver: bridge
 
 volumes:
-  ? frontend-deps
-  ? backend-deps
-  ? graphql-deps
+  frontend-deps:
+  backend-deps:
