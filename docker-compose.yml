@@ -8,6 +8,12 @@ services:
     volumes:
       - ./front-end:/front
       - frontend-deps:/front/node_modules
+    networks:
+      - app
+    links:
+      - backend
+    depends_on:
+      - "backend"
   backend:
     build: back-end
     command: yarn start
